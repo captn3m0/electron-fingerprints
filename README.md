@@ -12,7 +12,7 @@ Written as the backend for [`which-electon`][we].
 
 ## usage
 
-This is just the raw data files, see [which-electron][we] for a usable package.
+This is just the raw data files, see [which-electron][we] for a usable package. The `lookup.json` file is published as the `electron-fingerprints` package on NPM.
 
 ## LICENSE
 

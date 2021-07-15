@@ -12,8 +12,6 @@ function rsearch($dir) {
 
 function generateFingerprint($version, $output, $hash_file) {
 	$manifest = [];
-
-	$manifest['version'] = $version;
 	foreach(rsearch($output) as $file) {
 		$path = substr($file, strlen($output) + 1);
 		$manifest[$path] = sha1_file($file);

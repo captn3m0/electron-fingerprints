@@ -1,0 +1,5 @@
+*.php
+.git
+node_modules/
+hashes/
+versions.txt

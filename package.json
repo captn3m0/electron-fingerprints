@@ -1,0 +1,21 @@
+{
+  "name": "electron-fingerprints",
+  "version": "1.0.0",
+  "description": "Fingerprints of various files for all electron releases",
+  "main": "lookup.json",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/captn3m0/electron-fingerprints.git"
+  },
+  "keywords": [
+    "electron",
+    "fingerprint",
+    "security"
+  ],
+  "author": "Nemo <npm@captnemo.in>",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/captn3m0/electron-fingerprints/issues"
+  },
+  "homepage": "https://github.com/captn3m0/electron-fingerprints#readme"
+}

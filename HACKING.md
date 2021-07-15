@@ -8,4 +8,4 @@ This includes all releases that were not:
 2. beta releases
 3. older than 0.24.0 (electron was called atom-shell before that)
 
-All generated hashes are kept in `hashes/`.
+All generated hashes are kept in `hashes/`. The generated lookup table is saved at lookup.json
