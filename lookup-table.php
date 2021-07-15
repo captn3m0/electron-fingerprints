@@ -11,6 +11,10 @@ foreach(glob('hashes/*.json') as $h) {
 	$name = basename($h, '.json');
 	list($os, $arch, $version) = explode('-', $name, 3);
 	foreach($data as $file=>$hash) {
+		// Including locales increases the file size by too much.
+		if (strpos($file, '.pak') !== false) {
+			continue;
+		}
 		$subTable = "$os-$arch";
 		if(!isset($lookup[$subTable][$hash])) {
 			$lookup[$subTable][$hash] = [];
