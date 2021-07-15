@@ -14,6 +14,16 @@ Written as the backend for [`which-electon`][we].
 
 This is just the raw data files, see [which-electron][we] for a usable package. The `lookup.json` file is published as the `electron-fingerprints` package on NPM.
 
+## supported releases
+
+All Stable electron releases for the following architectures are fingerprinted:
+
+- linux-x64
+- darwin-x64 (Mac OS)
+- win32-x64 (Windows)
+
+A list of release fingerprints is under the `hashes` directory.
+
 ## LICENSE
 
 Released under WTFPL.
