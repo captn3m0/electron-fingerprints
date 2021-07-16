@@ -1,4 +1,4 @@
-# electron-fingerprints
+# electron-fingerprints ![npm bundle size](https://img.shields.io/bundlephobia/minzip/electron-fingerprints) ![npm](https://img.shields.io/npm/v/electron-fingerprints) ![NPM](https://img.shields.io/npm/l/electron-fingerprints) ![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-blue)
 
 Generates fingerprints for electron version detection by downloading electron releases and generating checksums of the files contained in each release.
 
