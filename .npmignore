@@ -5,3 +5,5 @@ hashes/
 versions.txt
 HACKING.md
 .editorconfig
+.github
+test.js
