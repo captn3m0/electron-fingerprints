@@ -2,10 +2,13 @@
   "name": "electron-fingerprints",
   "version": "1.0.0",
   "description": "Fingerprints of various files for all electron releases",
-  "main": "lookup.json",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/captn3m0/electron-fingerprints.git"
+  },
+  "scripts": {
+    "test": "node test.js"
   },
   "keywords": [
     "electron",
