@@ -34,89 +34,19 @@ You can sort or filter the returned versions if needed.
 All Stable electron releases for the following architectures are fingerprinted:
 
 - linux-x64
+- linux-arm64
 - darwin-x64 (Mac OS)
 - win32-x64 (Windows)
+- win32-arm64 (Windows)
+- darwin-arm64 (Apple Silicon)
 
 A list of release fingerprints is under the `hashes` directory.
 
-## todo
-
-- [ ] Add support for darwin-arm
-
 ## which files are present?
 
-Here's a count of file extensions present across all releases:
+Here's a count of the most common extensions present across all releases:
 
 ```
-      9 framework/Frameworks
-      9 Frameworks
-     13 app/Contents/MacOS/crash_report_sender
-     13 crash_report_sender
-     13 framework/Versions/A/Libraries/Libraries
-     13 framework/Versions/A/Resources/Inspector
-     13 Inspector
-     14 htaccess
-     15 npmignore
-     15 txt
-     26 1
-     26 strings
-     30 yml
-     45 markdown
-     50 framework/ReactiveObjC
-     50 framework/Versions/A/ReactiveObjC
-     59 4
-     70 11
-     72 app/Contents/MacOS/Electron Helper (GPU)
-     72 app/Contents/MacOS/Electron Helper (Plugin)
-     72 app/Contents/MacOS/Electron Helper (Renderer)
-     72 framework/Helpers
-     72 framework/Versions/A/Helpers/chrome_crashpad_handler
-     94 chrome_crashpad_handler
-     94 Helpers
-    100 ReactiveObjC
-    171 (GPU)
-    171 (Plugin)
-    171 (Renderer)
-    185 chrome-sandbox
-    223 app/Contents/MacOS/Electron Helper EH
-    223 app/Contents/MacOS/Electron Helper NP
-    223 EH
-    223 NP
-    230 framework/Versions/A/Resources/crashpad_handler
-    238 svg
-    262 framework/ReactiveCocoa
-    262 framework/Versions/A/ReactiveCocoa
-    312 app/Contents/MacOS/Electron
-    312 app/Contents/MacOS/Electron Helper
-    312 DS_Store
-    312 framework/Electron Framework
-    312 framework/Libraries
-    312 framework/Mantle
-    312 framework/Squirrel
-    312 framework/Versions/A/Electron Framework
-    312 framework/Versions/A/Mantle
-    312 framework/Versions/A/Resources/ShipIt
-    312 framework/Versions/A/Squirrel
-    357 crashpad_handler
-    436 electron
-    436 exe
-    436 ShipIt
-    449 Libraries
-    745 json
-    772 ReactiveCocoa
-    773 nib
-    774 icns
-    786 framework/Headers
-    786 framework/Modules
-    872 Framework
-    872 Mantle
-    872 Squirrel
-   1120 png
-   1158 Headers
-   1158 Modules
-   1248 framework/Resources
-   1248 framework/Versions/Current
-   1299 app/Contents/PkgInfo
    1620 dat
    1620 version
    1650 LICENSE
@@ -160,6 +90,11 @@ electron
 (Plugin)
 (Renderer)
 ```
+
+`which-electron` uses the following extensions and filenames to fingerprint:
+
+- `.h`, `.dll`, `.bin`, `.asar`, `.dylib`, `.so`, `.exe`
+- `electron framework`, `squirrel`, `electron`, `electron helper`, `chrome_100_percent`, `chrome_200_percent`
 
 ## license
 
