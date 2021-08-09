@@ -28,5 +28,5 @@ foreach(glob('hashes/*.json') as $h) {
 
 foreach($lookup as $file => $data) {
     $json = json_encode($data);
-    file_put_contents("$file.json", $json);
+    file_put_contents("lookup/$file.json", $json);
 }
