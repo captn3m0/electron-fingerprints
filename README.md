@@ -27,11 +27,11 @@ lookup['win32-x64']['baf786083f482c1f035e50e105b5f7475af1e00b']
 // ["v1.4.3", "v1.4.4", "v1.4.5"]
 ```
 
-You can sort or filter the returned versions if needed.
+You can sort or filter the returned versions if needed. If you'd like to access the raw data, see `HACKING.md` for a schema description.
 
 ## supported releases
 
-All Stable electron releases for the following architectures are fingerprinted:
+All *Stable* electron releases for the following architectures are fingerprinted:
 
 - linux-x64
 - linux-arm64
@@ -40,7 +40,7 @@ All Stable electron releases for the following architectures are fingerprinted:
 - win32-arm64 (Windows)
 - darwin-arm64 (Apple Silicon)
 
-A list of release fingerprints is under the `hashes` directory.
+A list of release fingerprints is under the `hashes` directory. Releases made when Electron was still called `atom-shell` are not supported (Before April 2015).
 
 ## which files are present?
 
