@@ -1,4 +1,6 @@
 <?php
+const VERSION_EXCLUDE = ['nightly', 'beta', 'alpha'];
+
 // https://stackoverflow.com/a/54325258/368328
 function rsearch($dir) {
     $dir = new RecursiveDirectoryIterator($dir);
@@ -45,7 +47,36 @@ function extract_release($input, $output) {
 $archs = ['x64', 'arm64'];
 $oses = ['linux', 'darwin', 'win32'];
 
-foreach(file('versions.txt', FILE_IGNORE_NEW_LINES) as $version) {
+/**
+ * We skip over unstable and atom-shell releases
+ */
+function get_versions() {
+    `rm -rf electron-src`;
+    `git clone https://github.com/electron/electron.git electron-src`;
+    chdir("electron-src");
+
+    $versions = [];
+    foreach(explode("\n", shell_exec("git tag -l")) as $version) {
+        foreach(VERSION_EXCLUDE as $needle) {
+            if (stripos($version, $needle) !== false) {
+                continue 2;
+            }
+        }
+        // Atom shell was renamed to electron in this release (17th April 2015)
+        if (version_compare($version, 'v0.24.0', '<')) {
+            continue;
+        }
+
+        $versions[] = $version;
+    }
+
+    chdir("..");
+    `rm -rf electron-src`;
+
+    return $versions;
+}
+
+foreach(get_versions() as $version) {
     foreach($oses as $os) {
         foreach($archs as $arch) {
 
