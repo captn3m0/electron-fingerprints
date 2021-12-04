@@ -76,6 +76,15 @@ function get_versions() {
     return $versions;
 }
 
+function release_exists($url) {
+    exec("curl --silent -I -o /dev/null -w '%{http_code}' $url", $output);
+    if (trim($output[0]) == '404') {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 foreach(get_versions() as $version) {
     foreach($oses as $os) {
         foreach($archs as $arch) {
@@ -105,7 +114,9 @@ foreach(get_versions() as $version) {
                 $url = "https://github.com/electron/electron/releases/download/$version/electron-$version-$os-$arch.zip";
                 echo $url . PHP_EOL;
 
-                if (download_release($url, $zipfile)) {
+                if (!release_exists($url)) {
+                    echo "[DL:404] $url\n";
+                } else if (download_release($url, $zipfile)) {
                     extract_release($zipfile, $output);
                     generateFingerprint($version, $output, $hash_file);
                 } else {
