@@ -1,6 +1,6 @@
 {
   "name": "electron-fingerprints",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Fingerprints of various files for all electron releases",
   "main": "index.js",
   "repository": {
