@@ -4,7 +4,7 @@ Generates fingerprints for electron version detection by downloading electron re
 
 ## why
 
-You can use this to guess which electron version is being used in a given application. 
+You can use this to guess which electron version is being used in a given application.
 A given electron version is (almost always) tightly bound to a node and chrome release as well, so
 you get a better sense of what the application is running.
 
@@ -21,9 +21,9 @@ npm install electron-fingerprints
 This is just the raw data files, see [which-electron][we] for a usable package. The `lookup.json` file is published as the `electron-fingerprints` package on NPM. Programmatic usage is still possible:
 
 ```javascript
-const lookup = require('electron-fingerprints')
+const lookup = require("electron-fingerprints");
 // baf786083f482c1f035e50e105b5f7475af1e00b = sha1(ffmpeg.dll)
-lookup['win32-x64']['baf786083f482c1f035e50e105b5f7475af1e00b']
+lookup["win32-x64"]["baf786083f482c1f035e50e105b5f7475af1e00b"];
 // ["v1.4.3", "v1.4.4", "v1.4.5"]
 ```
 
@@ -31,7 +31,7 @@ You can sort or filter the returned versions if needed. If you'd like to access 
 
 ## supported releases
 
-All *Stable* electron releases for the following architectures are fingerprinted:
+All _Stable_ electron releases for the following architectures are fingerprinted:
 
 - linux-x64
 - linux-arm64
@@ -41,6 +41,10 @@ All *Stable* electron releases for the following architectures are fingerprinted
 - darwin-arm64 (Apple Silicon)
 
 A list of release fingerprints is under the `hashes` directory. Releases made when Electron was still called `atom-shell` are not supported (Before April 2015).
+
+## versioning
+
+Starting from 2021.12.19 release, releases are versioned by YYYY.MM.DD format.
 
 ## which files are present?
 
