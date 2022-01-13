@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/captn3m0/electron-fingerprints/issues"
   },
-  "homepage": "https://github.com/captn3m0/electron-fingerprints#readme"
+  "homepage": "https://github.com/captn3m0/electron-fingerprints#readme",
+  "devDependencies": {
+    "semver": "^7.3.5"
+  }
 }
