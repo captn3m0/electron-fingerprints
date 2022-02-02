@@ -2,8 +2,10 @@
 const VERSION_EXCLUDE = ['nightly', 'beta', 'alpha'];
 
 // Command to fetch the list of versions from upstream
-const FETCH_VERSIONS_COMMAND = "git ls-remote -q --tags https://github.com/electron/electron.git |grep -v '\^{}' |cut -f2 | sed -s 's/refs\/tags\///g' ";
+const FETCH_VERSIONS_COMMAND = "git ls-remote -q --tags https://github.com/electron/electron.git | grep -v '\^{}' |cut -f2 | sed -s 's/refs\/tags\///g' ";
 
+// Since our "first-release-to-support-an-architecture-heuristic" isn't perfect, and there have been some old releases without
+// all architectures - this is a small exception list for old releases. This list isn't expected to grow any further.
 const MISSING_VERSIONS = ["v1.3.11-linux-x64","v1.3.11-darwin-x64","v1.3.11-win32-x64",
     "v1.4.9-linux-x64","v1.4.9-darwin-x64","v1.4.9-win32-x64","v1.8.0-linux-x64",
     "v1.8.0-linux-arm64","v1.8.0-darwin-x64","v1.8.0-win32-x64","v13.6.4-linux-x64",
