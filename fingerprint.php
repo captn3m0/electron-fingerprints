@@ -1,6 +1,19 @@
 <?php
 const VERSION_EXCLUDE = ['nightly', 'beta', 'alpha'];
 
+// Command to fetch the list of versions from upstream
+const FETCH_VERSIONS_COMMAND = "git ls-remote -q --tags https://github.com/electron/electron.git |grep -v '\^{}' |cut -f2 | sed -s 's/refs\/tags\///g' ";
+
+const MISSING_VERSIONS = ["v1.3.11-linux-x64","v1.3.11-darwin-x64","v1.3.11-win32-x64",
+    "v1.4.9-linux-x64","v1.4.9-darwin-x64","v1.4.9-win32-x64","v1.8.0-linux-x64",
+    "v1.8.0-linux-arm64","v1.8.0-darwin-x64","v1.8.0-win32-x64","v13.6.4-linux-x64",
+    "v13.6.4-linux-arm64","v13.6.4-darwin-x64","v13.6.4-darwin-arm64","v13.6.4-win32-x64",
+    "v13.6.4-win32-arm64","v13.6.5-linux-x64","v13.6.5-linux-arm64","v13.6.5-darwin-x64",
+    "v13.6.5-darwin-arm64","v13.6.5-win32-x64","v13.6.5-win32-arm64","v2.1.0-unsupported-20180809-linux-x64",
+    "v2.1.0-unsupported-20180809-linux-arm64","v2.1.0-unsupported-20180809-darwin-x64","v2.1.0-unsupported-20180809-win32-x64",
+    "v9.0.6-linux-x64","v9.0.6-linux-arm64","v9.0.6-darwin-x64","v9.0.6-win32-x64","v9.0.6-win32-arm64"
+];
+
 // https://stackoverflow.com/a/54325258/368328
 function rsearch($dir) {
     $dir = new RecursiveDirectoryIterator($dir);
@@ -10,6 +23,10 @@ function rsearch($dir) {
     foreach($ite as $file) {
          yield $file->getPathName();
     }
+}
+
+function known_missing_version($version, $os, $arch) {
+    return in_array("$version-$os-$arch", MISSING_VERSIONS);
 }
 
 function generateFingerprint($version, $output, $hash_file) {
@@ -51,12 +68,8 @@ $oses = ['linux', 'darwin', 'win32'];
  * We skip over unstable and atom-shell releases
  */
 function get_versions() {
-    `rm -rf electron-src`;
-    `git clone https://github.com/electron/electron.git electron-src`;
-    chdir("electron-src");
-
     $versions = [];
-    foreach(explode("\n", shell_exec("git tag -l")) as $version) {
+    foreach(explode("\n", shell_exec(FETCH_VERSIONS_COMMAND)) as $version) {
         foreach(VERSION_EXCLUDE as $needle) {
             if (stripos($version, $needle) !== false) {
                 continue 2;
@@ -69,9 +82,6 @@ function get_versions() {
 
         $versions[] = $version;
     }
-
-    chdir("..");
-    `rm -rf electron-src`;
 
     return $versions;
 }
@@ -112,6 +122,11 @@ foreach(get_versions() as $version) {
                 $zipfile = '/dev/shm/test.zip';
                 $output = '/dev/shm/electron';
                 $url = "https://github.com/electron/electron/releases/download/$version/electron-$version-$os-$arch.zip";
+
+                if (known_missing_version($version, $os, $arch)) {
+                    continue;
+                }
+
                 echo $url . PHP_EOL;
 
                 if (!release_exists($url)) {
