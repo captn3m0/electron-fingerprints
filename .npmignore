@@ -7,3 +7,4 @@ HACKING.md
 .editorconfig
 .github
 test.js
+Makefile
