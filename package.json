@@ -1,6 +1,6 @@
 {
   "name": "electron-fingerprints",
-  "version": "2022.2.21",
+  "version": "2022.3.5",
   "description": "Fingerprints of various files for all electron releases",
   "main": "index.js",
   "repository": {
