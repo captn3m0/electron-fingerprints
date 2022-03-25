@@ -1,8 +1,6 @@
 # HACKING
 
-There's two scripts:
-
-## `fingerprint.php`
+## `php update.php`
 
 This downloads the relevant releases from GitHub, and generates hashes of all files contained within each release.
 
@@ -23,9 +21,8 @@ All generated hashes are kept in `hashes/$version.json`. A sample snippet for th
 }
 ```
 
-## `lookup-table.php`
+Post generation of hashes, a lookup table is generated from all the hashes. Using this lookup table, you can query a hash and get a list of releases that specific hash was found in.
 
-This generates an inverted-lookup-table from all the hashes. So you can pass a hash and get a list of releases that specific hash was found in.
 These are stored in the following architecture specific files:
 
 - `lookup/darwin-arm64.json`
@@ -43,4 +40,3 @@ The schema for these files is fairly intuitive:
   "sha1_hash": ["list", "of", "versions"]
 }
 ```
-

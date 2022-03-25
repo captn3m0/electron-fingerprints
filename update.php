@@ -16,6 +16,9 @@ const MISSING_VERSIONS = ["v1.3.11-linux-x64","v1.3.11-darwin-x64","v1.3.11-win3
     "v9.0.6-linux-x64","v9.0.6-linux-arm64","v9.0.6-darwin-x64","v9.0.6-win32-x64","v9.0.6-win32-arm64"
 ];
 
+const ARCH_LIST = ['x64', 'arm64'];
+const OS_LIST = ['linux', 'darwin', 'win32'];
+
 // https://stackoverflow.com/a/54325258/368328
 function rsearch($dir) {
     $dir = new RecursiveDirectoryIterator($dir);
@@ -63,9 +66,6 @@ function extract_release($input, $output) {
     $zip->close();
 }
 
-$archs = ['x64', 'arm64'];
-$oses = ['linux', 'darwin', 'win32'];
-
 /**
  * We skip over unstable and atom-shell releases
  */
@@ -97,49 +97,91 @@ function release_exists($url) {
     }
 }
 
-foreach(get_versions() as $version) {
-    foreach($oses as $os) {
-        foreach($archs as $arch) {
+function generate_lookup_hashes() {
+    $lookup = [
+        'darwin-x64' => [],
+        'darwin-arm64' => [],
+        'linux-x64' => [],
+        'linux-arm64' => [],
+        'win32-x64' => [],
+        'win32-arm64' => [],
+    ];
 
-            // No releases were made for these combinations
-            // Apple Silicon support added in v11: https://www.electronjs.org/blog/apple-silicon
-            if (version_compare($version, 'v11.0.0', '<') and $os=='darwin' and $arch=='arm64') {
+    foreach(glob('hashes/*.json') as $h) {
+        $data = json_decode(file_get_contents($h));
+        $name = basename($h, '.json');
+        list($os, $arch, $version) = explode('-', $name, 3);
+        foreach($data as $file=>$hash) {
+            // Including locales increases the file size by too much.
+            if (strpos($file, '.pak') !== false and strlen(basename($file, '.pak') < 3)) {
                 continue;
             }
-
-            // https://github.com/electron/electron/pull/10219
-            // v1.8.0 was the first arm64 release
-            if (version_compare($version, 'v1.8.0', '<') and $os=='linux' and $arch=='arm64') {
-                continue;
+            $subTable = "$os-$arch";
+            if(!isset($lookup[$subTable][$hash])) {
+                $lookup[$subTable][$hash] = [];
             }
+            $lookup[$subTable][$hash][] = $version;
+        }
+    }
 
-            // 6.0.9 was the first ARM64 windows release (backport)
-            // https://github.com/electron/electron/pull/20260
-            if (version_compare($version, 'v6.0.9', '<') and $os=='win32' and $arch=='arm64') {
-                continue;
-            }
+    return $lookup;
+}
 
-            $hash_file = "hashes/$os-$arch-$version.json";
-            if (!file_exists($hash_file)) {
-                $zipfile = '/dev/shm/test.zip';
-                $output = '/dev/shm/electron';
-                $url = "https://github.com/electron/electron/releases/download/$version/electron-$version-$os-$arch.zip";
+function download_releases() {
+    foreach(get_versions() as $version) {
+        foreach(OS_LIST as $os) {
+            foreach(ARCH_LIST as $arch) {
 
-                if (known_missing_version($version, $os, $arch)) {
+                // No releases were made for these combinations
+                // Apple Silicon support added in v11: https://www.electronjs.org/blog/apple-silicon
+                if (version_compare($version, 'v11.0.0', '<') and $os=='darwin' and $arch=='arm64') {
                     continue;
                 }
 
-                echo $url . PHP_EOL;
+                // https://github.com/electron/electron/pull/10219
+                // v1.8.0 was the first arm64 release
+                if (version_compare($version, 'v1.8.0', '<') and $os=='linux' and $arch=='arm64') {
+                    continue;
+                }
 
-                if (!release_exists($url)) {
-                    echo "[DL:404] $url\n";
-                } else if (download_release($url, $zipfile)) {
-                    extract_release($zipfile, $output);
-                    generateFingerprint($version, $output, $hash_file);
-                } else {
-                    echo "[DL:FAIL] $version\n";
+                // 6.0.9 was the first ARM64 windows release (backport)
+                // https://github.com/electron/electron/pull/20260
+                if (version_compare($version, 'v6.0.9', '<') and $os=='win32' and $arch=='arm64') {
+                    continue;
+                }
+
+                $hash_file = "hashes/$os-$arch-$version.json";
+                if (!file_exists($hash_file)) {
+                    $zipfile = '/dev/shm/test.zip';
+                    $output = '/dev/shm/electron';
+                    $url = "https://github.com/electron/electron/releases/download/$version/electron-$version-$os-$arch.zip";
+
+                    if (known_missing_version($version, $os, $arch)) {
+                        continue;
+                    }
+
+                    echo $url . PHP_EOL;
+
+                    if (!release_exists($url)) {
+                        echo "[DL:404] $url\n";
+                    } else if (download_release($url, $zipfile)) {
+                        extract_release($zipfile, $output);
+                        generateFingerprint($version, $output, $hash_file);
+                    } else {
+                        echo "[DL:FAIL] $version\n";
+                    }
                 }
             }
         }
     }
 }
+
+function save_lookup($lookup) {
+    foreach($lookup as $file => $data) {
+        $json = json_encode($data);
+        file_put_contents("lookup/$file.json", $json);
+    }
+}
+
+download_releases();
+save_lookup(generate_lookup_hashes());
