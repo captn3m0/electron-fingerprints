@@ -1,5 +1,4 @@
-on: 
-  push:
+on:
   schedule:
     - cron: '0 18 * * *'
 name: Update
@@ -17,12 +16,16 @@ jobs:
       with:
         # Versioning is current date
         format: "YYYY.M.D"
-    - name: Update data
-      run: make all
     - uses: stefanzweifel/git-auto-commit-action@v4
+      id: commit
       with:
         commit_message: Update Electron Fingerprints
         commit_author: actions-user <65916846+actions-user@users.noreply.github.com>
-        tagging_message: "v${{ steps.current-time.outputs.formattedTime }}"
         file_pattern: hashes/*.json lookup/*.json
         status_options: '--untracked-files=no'
+    - name: NPM Version Bump
+      run: |
+        npm version "v${{ steps.current-time.outputs.formattedTime }}"
+        git push origin --tags
+      if: ${{ steps.commit.output.changes_detected}}
+    # TODO: NPM Publish
