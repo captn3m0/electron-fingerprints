@@ -40,3 +40,8 @@ The schema for these files is fairly intuitive:
   "sha1_hash": ["list", "of", "versions"]
 }
 ```
+
+## GitHub Actions
+
+1. Tests are run on all supported Node versions
+2. Hashes are automatically updated daily, and a new release is triggered in case of new electron releases.

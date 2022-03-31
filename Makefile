@@ -1,2 +1,0 @@
-all:
-	php update.php

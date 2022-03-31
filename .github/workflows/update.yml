@@ -1,5 +1,4 @@
 on:
-  push:
   schedule:
     - cron: '0 18 * * *'
 name: Update
@@ -7,13 +6,15 @@ jobs:
   update:
     name: Update
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
     - uses: actions/checkout@v3
       with:
         ref: ${{ github.head_ref }}
     - name: Update data
-      id: update
-      run: make all
+      run: php update.php
     - name: Get current date
       uses: josStorer/get-current-time@v2
       id: current-time
@@ -27,9 +28,16 @@ jobs:
         commit_author: actions-user <65916846+actions-user@users.noreply.github.com>
         file_pattern: hashes/*.json lookup/*.json
         status_options: '--untracked-files=no'
-    - name: NPM Version Bump
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+        registry-url: 'https://npm.pkg.github.com'
+    - name: NPM Publish
       run: |
+        npm test
         npm version "v${{ steps.current-time.outputs.formattedTime }}"
         git push origin --tags
+        npm publish
+      env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       if: ${{ steps.commit.output.changes_detected}}
-    # TODO: NPM Publish
