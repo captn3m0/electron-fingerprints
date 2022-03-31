@@ -64,5 +64,5 @@ assert.deepEqual(L["win32-arm64"]["21f751ea45147f9e0b7107b8129ae4dd2fd1ccd6"], [
 // d3dcompiler_47.dll
 assert.deepEqual(
   L["win32-x64"]["2256644f69435ff2fee76deb04d918083960d1eb"],
-  get_versions_in_range("win32-arm64", "v10.0.0", "v17.99.99")
+  get_versions_in_range("win32-arm64", "v10.0.0", "v18.99.99")
 );
