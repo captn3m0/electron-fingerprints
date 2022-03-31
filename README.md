@@ -1,6 +1,6 @@
-# [electron-fingerprints](https://www.npmjs.com/package/electron-fingerprints) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/electron-fingerprints) ![npm](https://img.shields.io/npm/v/electron-fingerprints) ![NPM](https://img.shields.io/npm/l/electron-fingerprints) ![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-blue)
+# [electron-fingerprints](https://github.com/captn3m0/electron-fingerprints/packages/1337118) ![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-blue)
 
-Generates fingerprints for electron version detection by downloading electron releases and generating checksums (sha1 hashes) of the files contained in each release. Published as a lookup table on NPM.
+Generates fingerprints for electron version detection by downloading electron releases and generating checksums (sha1 hashes) of the files contained in each release. Published as a lookup table on the GitHub NPM Registry.
 
 ## why
 
@@ -12,8 +12,18 @@ Written as the backend for [`which-electon`][we].
 
 ## install
 
+See [the GitHub documentation](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#installing-a-package) to configure the GitHub Packages NPM Registry.
+
+Install from the command line:
+
 ```shell
-npm install electron-fingerprints
+npm install @captn3m0/electron-fingerprints@2022.3.31
+```
+
+Install via package.json:
+
+```json
+"@captn3m0/electron-fingerprints": "2022.3.31"
 ```
 
 ## usage
@@ -33,72 +43,18 @@ You can sort or filter the returned versions if needed. If you'd like to access 
 
 All _Stable_ electron releases for the following architectures are fingerprinted:
 
-- linux-x64
-- linux-arm64
-- darwin-x64 (Mac OS)
-- win32-x64 (Windows)
-- win32-arm64 (Windows)
-- darwin-arm64 (Apple Silicon)
+- `linux-x64`
+- `linux-arm64`
+- `darwin-x64` (Mac OS)
+- `win32-x64` (Windows)
+- `win32-arm64` (Windows)
+- `darwin-arm64` (Apple Silicon)
 
 A list of release fingerprints is under the `hashes` directory. Releases made when Electron was still called `atom-shell` are not supported (Before April 2015).
 
 ## versioning
 
-Starting from 2021.12.19 release, releases are versioned by YYYY.MM.DD format.
-
-## which files are present?
-
-Here's a count of the most common extensions present across all releases:
-
-```
-   1620 dat
-   1620 version
-   1650 LICENSE
-   1744 Current
-   1744 Resources
-   1762 so
-   1830 html
-   1844 PkgInfo
-   1944 modulemap
-   2202 dylib
-   2354 js
-   2437 asar
-   3237 bin
-   4272 Helper
-   6142 plist
-   6224 dll
-  34235 Electron
-  45360 h
-  84596 pak
-```
-
-`.pak` files are currently excluded from the lookup table, but the other files should be easily usable. While lookup up, try to get hashes from the following extensions:
-
-```
-.h
-.dll
-.plust
-.Helper
-.bin
-.asar
-.dylib
-.so
-.plist
-Electron Framework
-Electron Helper
-Electron Helper (GPU)
-Electron Helper (Plugin)
-Electron Helper (Renderer)
-electron
-(GPU)
-(Plugin)
-(Renderer)
-```
-
-`which-electron` uses the following extensions and filenames to fingerprint:
-
-- `.h`, `.dll`, `.bin`, `.asar`, `.dylib`, `.so`, `.exe`
-- `electron framework`, `squirrel`, `electron`, `electron helper`, `chrome_100_percent`, `chrome_200_percent`
+Releases are versioned by YYYY.MM.DD format.
 
 ## license
 
