@@ -25,6 +25,6 @@
   },
   "homepage": "https://github.com/captn3m0/electron-fingerprints#readme",
   "devDependencies": {
-    "semver": "^7.3.5"
+    "semver": "^7.3.6"
   }
 }
