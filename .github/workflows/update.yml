@@ -40,4 +40,4 @@ jobs:
         npm publish
       env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      if: ${{ steps.commit.output.changes_detected}}
+      if: steps.commit.outputs.changes_detected == 'true'
