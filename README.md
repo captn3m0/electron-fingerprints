@@ -28,10 +28,10 @@ Install via package.json:
 
 ## usage
 
-This is just the raw data files, see [which-electron][we] for a usable package. The `lookup.json` file is published as the `electron-fingerprints` package on NPM. Programmatic usage is still possible:
+This is just the raw data files, see [which-electron][we] for a usable package. The `lookup.json` file is published as the `@captn3m0/electron-fingerprints` package on the GitHub NPM Package Registry. Programmatic usage is still possible:
 
 ```javascript
-const lookup = require("electron-fingerprints");
+const lookup = require("@captn3m0/electron-fingerprints");
 // baf786083f482c1f035e50e105b5f7475af1e00b = sha1(ffmpeg.dll)
 lookup["win32-x64"]["baf786083f482c1f035e50e105b5f7475af1e00b"];
 // ["v1.4.3", "v1.4.4", "v1.4.5"]
