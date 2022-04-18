@@ -25,7 +25,7 @@ jobs:
       id: commit
       with:
         commit_message: Update Electron Fingerprints
-        commit_author: actions-user <65916846+actions-user@users.noreply.github.com>
+        commit_author: 'github-actions[bot] <github-actions[bot]@users.noreply.github.com>'
         file_pattern: hashes/*.json lookup/*.json
         status_options: '--untracked-files=no'
     - uses: actions/setup-node@v2
