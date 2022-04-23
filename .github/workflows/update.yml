@@ -34,8 +34,6 @@ jobs:
         registry-url: 'https://npm.pkg.github.com'
     - name: NPM Publish
       run: |
-        npm install
-        npm test
         npm version "v${{ steps.current-time.outputs.formattedTime }}"
         git push origin --tags
         npm publish
