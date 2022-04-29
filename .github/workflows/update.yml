@@ -1,4 +1,5 @@
 on:
+  push:
   schedule:
     - cron: '0 18 * * *'
 name: Update
@@ -34,6 +35,8 @@ jobs:
         registry-url: 'https://npm.pkg.github.com'
     - name: NPM Publish
       run: |
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git config user.name "github-actions[bot]"
         npm version "v${{ steps.current-time.outputs.formattedTime }}"
         git push origin --tags
         npm publish
