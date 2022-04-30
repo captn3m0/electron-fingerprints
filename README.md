@@ -37,7 +37,7 @@ lookup["win32-x64"]["baf786083f482c1f035e50e105b5f7475af1e00b"];
 // ["v1.4.3", "v1.4.4", "v1.4.5"]
 ```
 
-You can sort or filter the returned versions if needed. If you'd like to access the raw data, see `HACKING.md` for a schema description.
+You can sort or filter the returned versions if needed. If you'd like to access the raw data, see `HACKING.md` for a schema description. If you'd like to use this in a project that doesn't use NPM, you can use this repository as a git submodule and track the `main` branch for updates.
 
 ## supported releases
 
