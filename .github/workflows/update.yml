@@ -39,6 +39,7 @@ jobs:
         npm version "v${{ steps.current-time.outputs.formattedTime }}"
         git push origin --tags
         npm publish
+        gh release create "v${{ steps.current-time.outputs.formattedTime }}" --notes "v${{steps.current-time.outputs.formattedTime}}" "loookup/*.json"
       env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       if: steps.commit.outputs.changes_detected == 'true'
