@@ -17,18 +17,18 @@ See [the GitHub documentation](https://docs.github.com/en/packages/working-with-
 Install from the command line:
 
 ```shell
-npm install @captn3m0/electron-fingerprints@2022.3.31
+npm install @captn3m0/electron-fingerprints
 ```
 
 Install via package.json:
 
 ```json
-"@captn3m0/electron-fingerprints": "2022.3.31"
+"@captn3m0/electron-fingerprints": "*"
 ```
 
 ## usage
 
-This is just the raw data files, see [which-electron][we] for a usable package. The `lookup.json` file is published as the `@captn3m0/electron-fingerprints` package on the GitHub NPM Package Registry. Programmatic usage is still possible:
+This repository only contains the raw data files, see [which-electron][we] for a usable package. The `lookup.json` files are published as the `@captn3m0/electron-fingerprints` package on the GitHub NPM Package Registry as well as on [GitHub Releases][releases]. Programmatic usage is still possible:
 
 ```javascript
 const lookup = require("@captn3m0/electron-fingerprints");
@@ -54,10 +54,11 @@ A list of release fingerprints is under the `hashes` directory. Releases made wh
 
 ## versioning
 
-Releases are versioned by YYYY.MM.DD format.
+Releases are versioned by the date on which they were made (as per UTC).
 
 ## license
 
 Released under WTFPL.
 
 [we]: https://github.com/captn3m0/which-electron
+[releases]: https://github.com/captn3m0/electron-fingerprints/releases
