@@ -1,4 +1,4 @@
-# [electron-fingerprints](https://github.com/captn3m0/electron-fingerprints/packages/1337118) ![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-blue)
+# [electron-fingerprints](https://github.com/captn3m0/electron-fingerprints/packages/1337118) ![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-blue) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/captn3m0/electron-fingerprints) ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/captn3m0/electron-fingerprints) ![GitHub repo size](https://img.shields.io/github/repo-size/captn3m0/electron-fingerprints)
 
 Generates fingerprints for electron version detection by downloading electron releases and generating checksums (sha1 hashes) of the files contained in each release. Published as a lookup table on the GitHub NPM Registry.
 
