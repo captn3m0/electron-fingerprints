@@ -41,4 +41,5 @@ jobs:
         gh release create "v${{ steps.current-time.outputs.formattedTime }}" --notes "v${{steps.current-time.outputs.formattedTime}}" "loookup/*.json"
       env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       if: steps.commit.outputs.changes_detected == 'true'
