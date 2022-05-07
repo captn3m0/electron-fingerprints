@@ -38,7 +38,7 @@ jobs:
         git config user.name "github-actions[bot]"
         # Pre and post version scripts in package.json
         npm version "v${{ steps.current-time.outputs.formattedTime }}"
-        gh release create "v${{ steps.current-time.outputs.formattedTime }}" --notes "v${{steps.current-time.outputs.formattedTime}}" "lookup/*.json"
+        gh release create "v${{ steps.current-time.outputs.formattedTime }}" --notes "v${{steps.current-time.outputs.formattedTime}}" ./lookup/*.json
       env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
