@@ -1,6 +1,6 @@
 {
   "name": "@captn3m0/electron-fingerprints",
-  "version": "2024.3.21",
+  "version": "2024.3.28",
   "description": "Fingerprints of various files for all electron releases",
   "main": "index.js",
   "repository": {
